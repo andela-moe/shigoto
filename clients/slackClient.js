@@ -38,10 +38,10 @@ const slackClient = {
       Promise.map(names, name => {
         this.createGroup(name)
           .then(() => {
-            resolve();
+            resolve(`Slack: ${names.join(', ')} created successfully.`);
           })
           .catch(error => {
-            reject(error);
+            reject(`Slack: ${error}`);
           });
       });
     });
