@@ -1,5 +1,6 @@
+const Promise = require('bluebird');
 const log = require('log4js').getLogger('pivotalTrackerClient');
-const request = require('request');
+const request = require('requestretry');
 
 const baseUrl = process.env.PIVOTAL_TRACKER_BASE_API_URL;
 const token = process.env.PIVOTAL_TRACKER_TOKEN;
@@ -8,6 +9,7 @@ const accountId = process.env.PIVOTAL_TRACKER_ACCOUNT_ID;
 const options = {
   baseUrl: baseUrl,
   json: true,
+  fullResponse: false,
   headers: {
     'Content-Type': 'application/json',
     'X-TrackerToken': token
@@ -15,24 +17,26 @@ const options = {
 };
 
 const pivotalTrackerClient = {
-  createProject(name, callback) {
-    let opt = {};
-    opt = Object.assign(opt, options);
+  createProject(name) {
+    return new Promise((resolve, reject) => {
+      let opt = {};
+      opt = Object.assign(opt, options);
 
-    opt.uri = '/projects';
-    opt.formData = {
-      name: name,
-      account_id: accountId
-    };
+      opt.uri = '/projects';
+      opt.formData = {
+        name: name,
+        account_id: accountId
+      };
 
-    request.post(opt, (error, response, body) => {
+      request.post(opt)
+        .then(body => {
+          return body.kind !== 'error' ? resolve() : reject(body);
+        })
+        .catch(error => {
+          reject(error);
+        });
 
-      if (!error && response.statusCode == 200 && body.id) {
-        callback(null, body);
-      } else {
-        callback(body.error, body);
-      }
-    })
+    });
   }
 
 };
