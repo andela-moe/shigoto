@@ -2,6 +2,8 @@ const Promise = require('bluebird');
 const log = require('log4js').getLogger('githubClient');
 const request = require('requestretry');
 
+const organization = process.env.GITHUB_ORGANIZATION;
+
 const gitHubClient = {
 
   options: {
@@ -45,15 +47,49 @@ const gitHubClient = {
         .then(response => {
 
           if (response.errors) {
-            reject(response.errors
+            const errors = response.errors
               .map(error => error.message)
-              .join(' ,'));
+              .join(' ,');
+
+            reject(`GitHub: ${errors}`);
           } else {
-            resolve();
+            resolve('GitHub: repo created successfully.');
           }
         })
         .catch(error => {
-          log.error(error);
+          reject(error);
+        });
+    });
+  },
+
+  addUserToRepository(username, repo){
+    return new Promise((resolve, reject) => {
+      const options = this.options;
+
+      options.uri = `/repos/${organization}/${repo}/collaborators/${username}`;
+      options.headers.Accept = 'application/vnd.github.swamp-thing-preview+json';
+      options.body = {
+        permission: 'admin'
+      };
+
+      /** Disclaimer: this endpoint is terribly unstable,
+       * it tends to return 'undefined' upon some successful calls
+       * for reasons not known to man.
+       * **/
+      request.put(options)
+        .then(response => {
+          if (response !== undefined && response.errors !== undefined) {
+            const errors = response.errors
+              .map(error => error.message)
+              .join(' ,');
+
+            reject(`GitHub: ${errors}`)
+          } else {
+            resolve('GitHub: user added successfully.');
+          }
+        })
+        .catch(error => {
+          reject(error);
         });
     });
   }

@@ -30,7 +30,7 @@ const pivotalTrackerClient = {
 
       request.post(opt)
         .then(body => {
-          return body.kind !== 'error' ? resolve() : reject(body);
+          return body.kind !== 'error' ? resolve('Pivotal Tracker: successful.') : reject(`Pivotal Tracker: ${body.general_problem}`);
         })
         .catch(error => {
           reject(error);
