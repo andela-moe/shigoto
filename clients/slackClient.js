@@ -1,39 +1,49 @@
+const Promise = require('bluebird');
 const log = require('log4js').getLogger('slackClient');
-const async = require('async');
-const request = require('request');
+const request = require('requestretry');
 
 const baseUrl = process.env.SLACK_BASE_API_URL;
 const token = process.env.SLACK_TOKEN;
 
 const slackClient = {
-  createGroup(name, callback) {
-    const options = {
-      baseUrl: baseUrl,
-      json: true,
-      uri: '/groups.create',
-      formData: {
-        token: token,
-        name: name
-      }
-    };
+  createGroup(name) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        baseUrl: baseUrl,
+        json: true,
+        fullResponse: false,
+        uri: '/groups.create',
+        formData: {
+          token: token,
+          name: name
+        }
+      };
 
-    request.post(options, (error, response, body) => {
-
-      if (!error && response.statusCode == 200 && body.ok) {
-        callback(null, body);
-      } else {
-        callback(body.error, body);
-      }
+      request.post(options)
+        .then(body => {
+          if (body.ok) {
+            resolve();
+          } else {
+            reject(body.error);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
     })
   },
 
-  createGroups(names, callback) {
-    async.map(names, this.createGroup, (error, response) => {
-      if (!error) {
-        callback(null, response);
-      } else {
-        callback(error, response);
-      }
+  createGroups(names) {
+    return new Promise((resolve, reject) => {
+      Promise.map(names, name => {
+        this.createGroup(name)
+          .then(() => {
+            resolve();
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     });
   }
 };
