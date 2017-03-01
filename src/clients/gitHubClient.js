@@ -1,6 +1,8 @@
-const Promise = require('bluebird');
-const log = require('log4js').getLogger('githubClient');
-const request = require('requestretry');
+import Promise from 'bluebird';
+import log4js from 'log4js';
+import request from 'requestretry';
+
+const log = log4js.getLogger('gitHubClient');
 
 const organization = process.env.GITHUB_ORGANIZATION;
 
@@ -95,4 +97,4 @@ const gitHubClient = {
   }
 };
 
-module.exports = gitHubClient;
+module.exports = { gitHubClient };
