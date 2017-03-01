@@ -1,6 +1,7 @@
-const log = require('log4js').getLogger('teamCtrl');
+import log4js from 'log4js';
+import { teamFacade } from '../facades/teamFacade';
 
-const teamFacade = require('../facades/teamFacade');
+const log = log4js.getLogger('teamCtrl');
 
 const teamsCtrl = {
   create(req, res) {
@@ -14,4 +15,4 @@ const teamsCtrl = {
   }
 }
 
-module.exports = teamsCtrl;
+module.exports = { teamsCtrl };

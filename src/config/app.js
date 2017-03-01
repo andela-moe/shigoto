@@ -1,10 +1,8 @@
+// Todo: Re-write for ES6 compliance
 var express = require('express');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-
-// var db = mongoose.connect(process.env.MONGODB_URL);
 
 var app = express();
 

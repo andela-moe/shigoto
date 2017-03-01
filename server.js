@@ -6,7 +6,7 @@
 
 require('dotenv').config();
 
-const app = require('./config/app');
+const app = require('./build/config/app');
 const debug = require('debug')('node-express-boilerplate:server');
 const http = require('http');
 

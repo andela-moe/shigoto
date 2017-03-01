@@ -1,9 +1,11 @@
-const Promise = require('bluebird');
-const log = require('log4js').getLogger('teamFacade');
+import Promise from 'bluebird';
+import log4js from 'log4js';
 
-const gitHubClient = require('../clients/gitHubClient');
-const slackClient = require('../clients/slackClient');
-const pivotalTrackerClient = require('../clients/pivotalTrackerClient');
+import { gitHubClient } from '../clients/gitHubClient';
+import { slackClient } from '../clients/slackClient';
+import { pivotalTrackerClient } from '../clients/pivotalTrackerClient';
+
+const log = log4js.getLogger('teamFacade');
 
 const gitHubOrganization = process.env.GITHUB_ORGANIZATION;
 const defaultGitHubUser = 'q-ode';
@@ -29,4 +31,4 @@ const teamFacade = {
   }
 };
 
-module.exports = teamFacade;
+module.exports = { teamFacade };

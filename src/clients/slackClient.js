@@ -1,6 +1,8 @@
-const Promise = require('bluebird');
-const log = require('log4js').getLogger('slackClient');
-const request = require('requestretry');
+import Promise from 'bluebird';
+import log4js from 'log4js';
+import request from 'requestretry';
+
+const log = log4js.getLogger('slackClient');
 
 const baseUrl = process.env.SLACK_BASE_API_URL;
 const token = process.env.SLACK_TOKEN;
@@ -48,4 +50,4 @@ const slackClient = {
   }
 };
 
-module.exports = slackClient;
+module.exports = { slackClient };
