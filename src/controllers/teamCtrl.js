@@ -1,7 +1,4 @@
-import log4js from 'log4js';
 import { teamFacade } from '../facades/teamFacade';
-
-const log = log4js.getLogger('teamCtrl');
 
 const teamsCtrl = {
   create(req, res) {
@@ -9,10 +6,10 @@ const teamsCtrl = {
     const project = req.body.project;
 
     teamFacade.setupNewTeamAndProject(team, project)
-      .then(message => {
+      .then((message) => {
         res.send(message);
       });
   }
-}
+};
 
 module.exports = { teamsCtrl };
