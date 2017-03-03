@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./server",
+    "start": "npm run build && node ./server",
     "test": "mocha ./test/**/*.spec.js --timeout 15000",
     "build": "babel src -d build"
   },
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "~1.15.2",
+    "botkit": "^0.5.1",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "cookie-parser": "~1.4.3",
