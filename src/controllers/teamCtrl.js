@@ -5,7 +5,7 @@ const log = log4js.getLogger('teamFacade');
 
 const teamsCtrl = {
   create(req, res) {
-    log.info(req.body);
+    log.info(req);
     const team = req.body.team;
     const project = req.body.project;
 
