@@ -11,7 +11,7 @@ const teamsCtrl = {
 
     teamFacade.setupNewTeamAndProject(team, project)
       .then((message) => {
-        res.send(message);
+        res.send({ text: message.join('\n') });
       });
   }
 };
