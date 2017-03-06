@@ -1,15 +1,33 @@
 {
-  "name": "node-express-boilerplate",
+  "name": "shigoto",
   "scripts": {
   },
   "env": {
-    "MONGODB_URL": {
+    "SLACK_BASE_API_URL": {
       "required": true
     },
-    "JWT_SECRET": {
+    "SLACK_TOKEN": {
       "required": true
     },
-    "JWT_EXPIRY": {
+    "PIVOTAL_TRACKER_BASE_API_URL": {
+      "required": true
+    },
+    "PIVOTAL_TRACKER_TOKEN": {
+      "required": true
+    },
+    "PIVOTAL_TRACKER_ACCOUNT_ID": {
+      "required": true
+    },
+    "GITHUB_API_BASE_URL": {
+      "required": true
+    },
+    "GITHUB_USER_TOKEN": {
+      "required": true
+    },
+    "GITHUB_USER_AGENT": {
+      "required": true
+    },
+    "GITHUB_ORGANIZATION": {
       "required": true
     }
   },
