@@ -5,9 +5,15 @@ const log = log4js.getLogger('teamFacade');
 
 const teamsCtrl = {
   create(req, res) {
-    log.info(req.body);
-    const team = req.body.team;
-    const project = req.body.project;
+    const payload = req.body.text;
+    const setupInfo = payload.split(' ');
+
+    if (setupInfo.length !== 2) {
+      res.status(400).send({ text: 'Invalid Request' });
+    }
+
+    const team = setupInfo[0];
+    const project = setupInfo[1];
 
     teamFacade.setupNewTeamAndProject(team, project)
       .then((message) => {
