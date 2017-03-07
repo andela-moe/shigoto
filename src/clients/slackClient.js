@@ -1,19 +1,22 @@
 import Promise from 'bluebird';
 import request from 'requestretry';
 
-const baseUrl = process.env.SLACK_BASE_API_URL;
-const token = process.env.SLACK_TOKEN;
-
 const slackClient = {
+  baseUrl: process.env.SLACK_BASE_API_URL,
+  token: process.env.SLACK_TOKEN,
+
+  options: {
+    baseUrl: this.baseUrl,
+    json: true,
+    fullResponse: false,
+  },
+
   createGroup(name) {
     return new Promise((resolve, reject) => {
-      const options = {
-        baseUrl,
-        json: true,
-        fullResponse: false,
-        uri: '/groups.create',
-        formData: { token, name }
-      };
+      const options = this.options;
+
+      options.url = '/groups.create';
+      options.formData = { name, token: this.token };
 
       request.post(options)
         .then((body) => {

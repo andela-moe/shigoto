@@ -5,7 +5,6 @@ import request from 'requestretry';
 const log = log4js.getLogger('gitHubClient');
 
 const gitHubClient = {
-
   options: {
     baseUrl: process.env.GITHUB_API_BASE_URL,
     fullResponse: false,
