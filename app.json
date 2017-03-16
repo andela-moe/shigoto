@@ -33,7 +33,7 @@
     "GITHUB_ORGANIZATION": {
       "required": true
     },
-    "ROLLBAR_API_KEY": {
+    "ROLLBAR_ACCESS_TOKEN": {
       "required": true
     }
   },

@@ -2,7 +2,7 @@ import log4js from 'log4js';
 import rollbar from 'rollbar';
 import { teamFacade } from '../facades/teamFacade';
 
-rollbar.init();
+rollbar.init(process.env.ROLLBAR_ACCESS_TOKEN);
 const teamsCtrl = {
   create(req, res) {
     rollbar.reportMessage(`Request: ${req.body.text}`);
