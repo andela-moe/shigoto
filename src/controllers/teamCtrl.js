@@ -1,10 +1,11 @@
 import log4js from 'log4js';
+import rollbar from 'rollbar';
 import { teamFacade } from '../facades/teamFacade';
 
-const log = log4js.getLogger('teamFacade');
-
+rollbar.init();
 const teamsCtrl = {
   create(req, res) {
+    rollbar.reportMessage(`Request: ${req.body.text}`);
     const payload = req.body.text;
     const setupInfo = payload.split(' ');
 
