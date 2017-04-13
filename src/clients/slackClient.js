@@ -2,11 +2,10 @@ import Promise from 'bluebird';
 import request from 'requestretry';
 
 const slackClient = {
-  baseUrl: process.env.SLACK_BASE_API_URL,
   token: process.env.SLACK_TOKEN,
 
   options: {
-    baseUrl: this.baseUrl,
+    baseUrl: process.env.SLACK_BASE_API_URL,
     json: true,
     fullResponse: false,
   },
