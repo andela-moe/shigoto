@@ -24,7 +24,7 @@ const teamFacade = {
 
       slackClient.createGroups(slackGroups),
 
-      pivotalTrackerClient.createProject(`${team}-${project}`)
+      pivotalTrackerClient.createProjectAndAddUser(`${team}-${project}`)
     ]
         .map(promise => promise.catch(error => error))
     );
