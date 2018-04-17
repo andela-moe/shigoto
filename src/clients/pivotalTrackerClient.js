@@ -35,7 +35,7 @@ const pivotalTrackerClient = {
     });
   },
 
-  addUserToProject(projectId, userEmail = 'adebayo.adesanya@andela.com') {
+  addUserToProject(projectId, userEmail = 'mark.edomwande@andela.com') {
     return new Promise((resolve, reject) => {
       const options = this.options;
 

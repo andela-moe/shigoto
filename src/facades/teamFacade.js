@@ -8,7 +8,7 @@ import { pivotalTrackerClient } from '../clients/pivotalTrackerClient';
 const log = log4js.getLogger('teamFacade');
 
 const gitHubOrganization = process.env.GITHUB_ORGANIZATION;
-const defaultGitHubUser = 'q-ode';
+const defaultGitHubUser = 'andela-moe';
 
 const teamFacade = {
   setupNewTeamAndProject(team, project) {
